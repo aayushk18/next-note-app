@@ -9,9 +9,14 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
 
   const fetchNotes = async () => {
-    const res = await fetch("/api/notes");
+    try {
+        const res = await fetch("/api/notes");
     const data = await res.json();
     setNotes(data);
+    } catch (error) {
+      toast.error("Failed to load Notes")
+    }
+  
   };
 
   useEffect(() => {

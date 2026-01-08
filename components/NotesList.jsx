@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Trash2, Clock, Pencil, Check, X } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function NotesList({ notes, fetchNotes }) {
   const [editingId, setEditingId] = useState(null);
@@ -9,11 +10,20 @@ export default function NotesList({ notes, fetchNotes }) {
   const [editContent, setEditContent] = useState("");
 
   const deleteNote = async (id) => {
+try {
     await fetch("/api/notes", {
       method: "DELETE",
       body: JSON.stringify({ id }),
     });
     fetchNotes();
+    toast.success("Note deleted successfully")
+
+} catch (error) {
+  toast.error("Failed to delete note")
+
+}
+
+  
   };
 
   const startEdit = (note) => {
@@ -29,7 +39,9 @@ export default function NotesList({ notes, fetchNotes }) {
   };
 
   const updateNote = async (id) => {
-    await fetch("/api/notes", {
+
+    try {
+        await fetch("/api/notes", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,6 +53,13 @@ export default function NotesList({ notes, fetchNotes }) {
 
     cancelEdit();
     fetchNotes();
+
+    toast.success("Note updated successfullys")
+    } catch (error) {
+     
+      toast.error("Failed to update note")
+    }
+  
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import toast from "react-hot-toast";
 
 const PlusCircle = dynamic(() => import("lucide-react").then(m => m.PlusCircle), { ssr: false });
 const Type = dynamic(() => import("lucide-react").then(m => m.Type), { ssr: false });
@@ -12,13 +13,19 @@ export default function NoteForm({ fetchNotes }) {
   const [content, setContent] = useState("");
 
   const createNote = async () => {
-    await fetch("/api/notes", {
+    try {
+         await fetch("/api/notes", {
       method: "POST",
       body: JSON.stringify({ title, content }),
     });
     setTitle("");
     setContent("");
     fetchNotes();
+    toast.success("Note created successfully")
+    } catch (error) {
+      toast.error("Failed to create Notes")
+    }
+ 
   };
 
   return (

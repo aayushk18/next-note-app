@@ -13,7 +13,19 @@ export default function NoteForm({ fetchNotes }) {
   const [content, setContent] = useState("");
 
   const createNote = async () => {
+
+    if (!title.trim()) {
+      toast.error("Title is required");
+      return;
+    }
+
+    if (!content.trim()) {
+      toast.error("Content is required");
+      return;
+    }
+
     try {
+
          await fetch("/api/notes", {
       method: "POST",
       body: JSON.stringify({ title, content }),

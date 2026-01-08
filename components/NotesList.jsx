@@ -131,22 +131,22 @@ try {
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={() => startEdit(note)}
-                      className="p-2 rounded-lg hover:bg-gray-100
-                                 opacity-0 group-hover:opacity-100 transition"
-                      aria-label="Edit note"
-                    >
-                      <Pencil className="w-4 h-4 text-gray-600" />
-                    </button>
-                    <button
-                      onClick={() => deleteNote(note._id)}
-                      className="p-2 rounded-lg hover:bg-red-50
-                                 opacity-0 group-hover:opacity-100 transition"
-                      aria-label="Delete note"
-                    >
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </button>
+                   <button
+  onClick={() => startEdit(note)}
+  className="p-2 rounded-lg hover:bg-gray-100 transition"
+  aria-label="Edit note"
+>
+  <Pencil className="w-4 h-4 text-gray-600" />
+</button>
+
+<button
+  onClick={() => deleteNote(note._id)}
+  className="p-2 rounded-lg hover:bg-red-50 transition"
+  aria-label="Delete note"
+>
+  <Trash2 className="w-4 h-4 text-red-500" />
+</button>
+
                   </>
                 )}
               </div>
